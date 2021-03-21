@@ -7,24 +7,24 @@ export default () => (
     <div className="left">
       <img src={nearLogo} alt="" style={{ height: "7em" }} />
       <div className="text">
-        <p>Crypto Corgis was NFT </p>
+        <p>Crypto Corgis NFT </p>
         <p>built on NEAR Protocol. </p>
         <p>
-          Learn more at
+          Learn more at  {" "}
           <a
             href="https://near.org/"
             target="_blank"
             rel="noopener noreferrer"
             className="blue"
           >
-            {" "}
+           
             near.org
           </a>
         </p>
       </div>
     </div>
     <div className="right">
-      <p>© new Date().getFullYear() Near Protocol </p>
+      <p>© {new Date().getFullYear()} </p>
       <p>All Rights Reserved.</p>
       <p className="blue">
         Privacy Policy <span className="black"> | </span> Terms of Use

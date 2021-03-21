@@ -1,27 +1,28 @@
-import React, { useReducer, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 const BOATLOAD_OF_GAS = 300000000000000
-
-const [loading, setLoading] = useState(false)
-const [error, setError] = useState(null)
-
-const [creating, setCreating] = useState(false)
-const [created, setCreated] = useState(false)
-const [transfering, setTransfering] = useState(false)
-const [deleting, setDeleting] = useState(false)
-
-const [corgis, setCorgis] = useState(null)
-const [corgi, setCorgi] = useState(null)
-const [displayCorgis, setDisplay] = useState([])
 
 export const ContractContext = React.createContext();
 
 export const ContractContextProvider = ({ Contract, children }) => {
+  console.log(Contract)
+
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
+  const [creating, setCreating] = useState(false)
+  const [created, setCreated] = useState(false)
+  const [transfering, setTransfering] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+
+  const [corgis, setCorgis] = useState(null)
+  const [corgi, setCorgi] = useState(null)
+  const [displayCorgis, setDisplay] = useState([])
 
   const createCorgi = useCallback(
     (name, color, backgroundColor, quote) => {
       setCreating(true)
-      Contract.createCorgi(
+      Contract.create_corgi(
         { name, color, backgroundColor, quote },BOATLOAD_OF_GAS)
         .then(() => {
           setCreating(false)
@@ -35,7 +36,7 @@ export const ContractContextProvider = ({ Contract, children }) => {
   const transferCorgi = useCallback(
     (receiver, id, message) => {
       setTransfering(true)
-      Contract.transferCorgi({ receiver, id, message }, BOATLOAD_OF_GAS)
+      Contract.transfer_with_message({ receiver, id, message }, BOATLOAD_OF_GAS)
         .then(() => setTransfering(false))
         .catch((error) => setError(error));
     },
@@ -45,9 +46,9 @@ export const ContractContextProvider = ({ Contract, children }) => {
   const deleteCorgi = useCallback(
     (id) => {
       setDeleting(true)
-      Contract.deleteCorgi({ id }, BOATLOAD_OF_GAS)
-        .then(() => setDeleting(ture))
-        .catch((error) => dispatchContract({ type: 'FAIL', error }));
+      Contract.delete_corgi({ id }, BOATLOAD_OF_GAS)
+        .then(() => setDeleting(false))
+        .catch((error) => setError(error));
     },
     [Contract]
   );
@@ -55,7 +56,7 @@ export const ContractContextProvider = ({ Contract, children }) => {
   const getCorgisList = useCallback(
     (owner) => {
       setLoading(true)
-      Contract.getCorgisList({ owner })
+      Contract.get_corgis_by_owner({ owner })
         .then((corgis) => {
           setCorgis(corgis)
           setLoading(false)
@@ -68,7 +69,7 @@ export const ContractContextProvider = ({ Contract, children }) => {
   const getCorgi = useCallback(
     (id) => {
       setLoading(true)
-      Contract.getCorgi({ id })
+      Contract.get_corgi({ id })
         .then((corgi) => {
           setCorgi(corgi)
           setLoading(false)
@@ -80,7 +81,7 @@ export const ContractContextProvider = ({ Contract, children }) => {
 
   const getDisplayCorgis = useCallback(() => {
     setLoading(true)
-    Contract.displayGolbalCorgis()
+    Contract.display_global_corgis()
       .then((corgis) => {
         setDisplay(corgis)
         setLoading(false)
