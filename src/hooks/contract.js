@@ -1,10 +1,6 @@
 import React, { useReducer, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import Big from 'big.js';
 
-const BOATLOAD_OF_GAS = Big(1)
-  .times(10 ** 14)
-  .toFixed();
+const BOATLOAD_OF_GAS = 300000000000000
 
 const initialState = {
   loading: false,
@@ -194,18 +190,6 @@ export const ContractContextProvider = ({ Contract, children }) => {
       {children}
     </ContractContext.Provider>
   );
-};
-
-ContractContextProvider.propTypes = {
-  Contract: PropTypes.shape({
-    getCorgi: PropTypes.func.isRequired,
-    getCorgisList: PropTypes.func.isRequired,
-    displayGolbalCorgis: PropTypes.func.isRequired,
-    transferCorgi: PropTypes.func.isRequired,
-    createCorgi: PropTypes.func.isRequired,
-    deleteCorgi: PropTypes.func.isRequired,
-  }).isRequired,
-  children: PropTypes.element.isRequired,
 };
 
 export default ContractContextProvider;

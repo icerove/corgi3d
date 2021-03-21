@@ -1,13 +1,11 @@
 import React, { useState, useCallback } from "react";
-import PropTypes from "prop-types";
 
 export const NearContext = React.createContext({
   user: null,
   nearContract: null,
   signIn: () => {},
   signOut: () => {},
-  isLoading: false,
-  setLoading: () => {},
+  isLoading: false
 });
 
 const NearContextProvider = ({
@@ -39,31 +37,12 @@ const NearContextProvider = ({
         signIn,
         signOut,
         isLoading,
-        setLoading,
         nearContent,
       }}
     >
       {children}
     </NearContext.Provider>
   );
-};
-
-NearContextProvider.propTypes = {
-  currentUser: PropTypes.shape({
-    accountId: PropTypes.string.isRequired,
-    balance: PropTypes.string.isRequired,
-  }),
-  nearConfig: PropTypes.shape({
-    contractName: PropTypes.string.isRequired,
-  }).isRequired,
-  wallet: PropTypes.shape({
-    requestSignIn: PropTypes.func.isRequired,
-    signOut: PropTypes.func.isRequired,
-  }).isRequired,
-  near: PropTypes.shape({
-    connection: PropTypes.object.isRequired,
-  }).isRequired,
-  children: PropTypes.element.isRequired,
 };
 
 export default NearContextProvider;
