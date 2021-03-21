@@ -8,7 +8,7 @@ export default ({ corgi }) => (
     <div className="corgiboard">
       <div
         style={{
-          backgroundColor: corgi.backgroundColor,
+          backgroundColor: corgi.background_color,
           borderRadius: "10px",
           padding: "20px",
           display: "inline-block",

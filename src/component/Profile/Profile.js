@@ -13,6 +13,7 @@ export default () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
   const { corgis, loading, deleteCorgi, deleting, error } = useContract;
+  console.log(corgis)
   if (!nearContext.user) {
     return <Redirect to="/" />;
   }

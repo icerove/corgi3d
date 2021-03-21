@@ -18,8 +18,8 @@ export default () => {
     setBackgroundColor,
   } = useCharacter();
   const useContract = useContext(ContractContext);
-  const { creating, created, error } = useContract;
-  console.error(error);
+  const { creating, created, error, setCreated } = useContract;
+
   if (!nearContext.user) {
     return <Redirect to="/" />;
   }
@@ -29,6 +29,7 @@ export default () => {
   }
 
   if (created) {
+    setCreated(false)
     return <Redirect to="/account" />;
   }
 

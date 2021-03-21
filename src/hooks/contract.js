@@ -5,7 +5,6 @@ const BOATLOAD_OF_GAS = 300000000000000
 export const ContractContext = React.createContext();
 
 export const ContractContextProvider = ({ Contract, children }) => {
-  console.log(Contract)
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -23,7 +22,7 @@ export const ContractContextProvider = ({ Contract, children }) => {
     (name, color, backgroundColor, quote) => {
       setCreating(true)
       Contract.create_corgi(
-        { name, color, backgroundColor, quote },BOATLOAD_OF_GAS)
+        { name, color, background_color: backgroundColor, quote },BOATLOAD_OF_GAS)
         .then(() => {
           setCreating(false)
           setCreated(true)
@@ -99,6 +98,7 @@ export const ContractContextProvider = ({ Contract, children }) => {
     created,
     transfering,
     deleting,
+    setCreated,
     createCorgi,
     deleteCorgi,
     transferCorgi,

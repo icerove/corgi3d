@@ -18,8 +18,7 @@ export default () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
   const { corgi, loading, getCorgi, transfering } = useContract;
-  const id = window.location.hash.slice(1);
-
+  const id = Number(window.location.hash.slice(-2))
   useEffect(() => {
     if (id) {
       getCorgi(id);

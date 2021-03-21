@@ -14,12 +14,12 @@ export default () => {
   const { loading, getCorgisList } = useContract;
   let {corgis} = useContract;
   let Corgis;
-  
+
   useEffect(() => {
     if (nearContext.user) {
       getCorgisList(nearContext.user.accountId);
     }
-  }, [getCorgisList, nearContext]);
+  }, [getCorgisList,nearContext ]);
   
   if (!nearContext.user) {
     return <Redirect to="/" />;
@@ -36,7 +36,7 @@ export default () => {
           <Link
             to={{
               pathname: "/@" + corgi.name,
-              hash: corgi.id,
+              hash: corgi.color + corgi.background_color + corgi.id
             }}
             key={corgi.id}
           >

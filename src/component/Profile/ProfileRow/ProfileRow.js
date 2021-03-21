@@ -28,10 +28,6 @@ export default ({ corgi, deleteCorgi }) => {
     show = "ULTRA RARE";
   }
 
-  const DeleteCorgi = () => {
-    deleteCorgi(corgi.id);
-  };
-
   return (
     <div
       style={{
@@ -44,7 +40,7 @@ export default ({ corgi, deleteCorgi }) => {
       <Link
         to={{
           pathname: "/@" + corgi.name,
-          hash: corgi.id,
+          hash: corgi.color + corgi.background_color + corgi.id
         }}
         key={corgi.id}
       >
@@ -61,7 +57,6 @@ export default ({ corgi, deleteCorgi }) => {
             <GiDiscussion style={{ color: "#9437ff" }} />
             {corgi.message ? corgi.message : "This lovely corgi is for you"}
           </p>
-          <Button description="^ delete" action={DeleteCorgi} />
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ export default ({ corgi, show, closeModal }) => {
             <Link
               to={{
                 pathname: "/share",
-                hash: corgi.id,
+                hash: corgi.color + corgi.background_color + corgi.sausage
               }}
               key={corgi.id}
             >
