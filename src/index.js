@@ -1,17 +1,71 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import getConfig from "./config.js";
+import * as nearlib from "near-api-js";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import App from "./App";
+import NearContextProvider from "./context/NearContext";
+import ContractContextProvider from "./hooks/contract";
+
+// Initializing contract
+async function InitContract() {
+  const nearConfig = getConfig(process.env.NODE_ENV || "development");
+
+  // Initializing connection to the NEAR
+  const near = await nearlib.connect({
+    deps: {
+      keyStore: new nearlib.keyStores.BrowserLocalStorageKeyStore(),
+    },
+    ...nearConfig,
+  });
+
+  // Needed to access wallet
+  const walletConnection = new nearlib.WalletConnection(near);
+
+  // Load in account data
+  let currentUser;
+  if (walletConnection.getAccountId()) {
+    currentUser = {
+      accountId: walletConnection.getAccountId(),
+      balance: (await walletConnection.account().state()).amount,
+    };
+  }
+
+  // Initializing our contract APIs by contract name and configuration.
+  const contract = await new nearlib.Contract(
+    walletConnection.account(),
+    nearConfig.contractName,
+    {
+      // View methods are read only. They don't modify the state, but usually return some value.
+      viewMethods: ["getCorgi", "getCorgisList", "displayGolbalCorgis"],
+      // Change methods can modify the state. But you don't receive the returned value when called.
+      changeMethods: ["transferCorgi", "createCorgi", "deleteCorgi"],
+      // Sender is the account ID to initialize transactions.
+      sender: walletConnection.getAccountId(),
+    }
+  );
+  return { contract, currentUser, nearConfig, walletConnection, near };
+}
+
+window.nearInitPromise = InitContract()
+  .then(({ contract, currentUser, nearConfig, walletConnection, near }) => {
+    const app = (
+      <NearContextProvider
+        currentUser={currentUser}
+        nearConfig={nearConfig}
+        wallet={walletConnection}
+        near={near}
+      >
+        <ContractContextProvider Contract={contract}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ContractContextProvider>
+      </NearContextProvider>
+    );
+
+    ReactDOM.render(app, document.getElementById("root"));
+  })
+  .catch(console.error);
