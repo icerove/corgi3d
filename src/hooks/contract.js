@@ -1,134 +1,52 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback, useState } from 'react';
 
 const BOATLOAD_OF_GAS = 300000000000000
 
-const initialState = {
-  loading: false,
-  error: null,
-  corgis: null,
-  creating: false,
-  created: false,
-  transfering: false,
-  deleting: false,
-  corgi: null,
-  displayCorgis: [],
-};
+const [loading, setLoading] = useState(false)
+const [error, setError] = useState(null)
 
-const contractReducer = (currentState, action) => {
-  switch (action.type) {
-    case 'START':
-      return {
-        ...currentState,
-        loading: true,
-      };
-    case 'FAIL':
-      return {
-        ...currentState,
-        loading: false,
-        creating: false,
-        transfering: false,
-        deleting: false,
-        error: action.error,
-      };
-    case 'GET_DISPLAY_CORGIS':
-      return {
-        ...currentState,
-        loading: false,
-        displayCorgis: action.corgis,
-      };
-    case 'GET_CORGISLIST_SUCCESS':
-      return {
-        ...currentState,
-        loading: false,
-        corgis: action.corgis,
-      };
-    case 'GET_CORGI_SUCCESS':
-      return {
-        ...currentState,
-        loading: false,
-        corgi: action.corgi,
-      };
-    case 'CREATE_START':
-      return {
-        ...currentState,
-        creating: true,
-      };
-    case 'CREATE_CORGI_SUCCESS':
-      return {
-        ...currentState,
-        creating: false,
-        created: true,
-      };
-    case 'TRANSFER_START':
-      return {
-        ...currentState,
-        transfering: true,
-      };
-    case 'TRANSFER_CORGI_SUCCESS':
-      return {
-        ...currentState,
-        transfering: false,
-      };
-    case 'DELETE_START':
-      return {
-        ...currentState,
-        deleting: true,
-      };
-    case 'DELETE_CORGI_SUCCESS':
-      return {
-        ...currentState,
-        deleting: false,
-      };
-    case 'CLEAR':
-      return {
-        ...currentState,
-        error: null,
-      };
-    default:
-      return initialState;
-  }
-};
+const [creating, setCreating] = useState(false)
+const [created, setCreated] = useState(false)
+const [transfering, setTransfering] = useState(false)
+const [deleting, setDeleting] = useState(false)
+
+const [corgis, setCorgis] = useState(null)
+const [corgi, setCorgi] = useState(null)
+const [displayCorgis, setDisplay] = useState([])
 
 export const ContractContext = React.createContext();
 
 export const ContractContextProvider = ({ Contract, children }) => {
-  const [contractState, dispatchContract] = useReducer(
-    contractReducer,
-    initialState
-  );
-
-  const clear = useCallback(() => dispatchContract({ type: 'CLEAR' }), []);
 
   const createCorgi = useCallback(
     (name, color, backgroundColor, quote) => {
-      dispatchContract({ type: 'CREATE_START' });
+      setCreating(true)
       Contract.createCorgi(
-        { name, color, backgroundColor, quote },
-        BOATLOAD_OF_GAS
-      )
+        { name, color, backgroundColor, quote },BOATLOAD_OF_GAS)
         .then(() => {
-          dispatchContract({ type: 'CREATE_CORGI_SUCCESS' });
+          setCreating(false)
+          setCreated(true)
         })
-        .catch((error) => dispatchContract({ type: 'FAIL', error }));
+        .catch((error) => setError(error));
     },
     [Contract]
   );
 
   const transferCorgi = useCallback(
     (receiver, id, message) => {
-      dispatchContract({ type: 'TRANSFER_START' });
+      setTransfering(true)
       Contract.transferCorgi({ receiver, id, message }, BOATLOAD_OF_GAS)
-        .then(() => dispatchContract({ type: 'TRANSFER_CORGI_SUCCESS' }))
-        .catch((error) => dispatchContract({ type: 'FAIL', error }));
+        .then(() => setTransfering(false))
+        .catch((error) => setError(error));
     },
     [Contract]
   );
 
   const deleteCorgi = useCallback(
     (id) => {
-      dispatchContract({ type: 'DELETE_START' });
+      setDeleting(true)
       Contract.deleteCorgi({ id }, BOATLOAD_OF_GAS)
-        .then(() => dispatchContract({ type: 'DELETE_CORGI_SUCCESS' }))
+        .then(() => setDeleting(ture))
         .catch((error) => dispatchContract({ type: 'FAIL', error }));
     },
     [Contract]
@@ -136,52 +54,55 @@ export const ContractContextProvider = ({ Contract, children }) => {
 
   const getCorgisList = useCallback(
     (owner) => {
-      dispatchContract({ type: 'START' });
+      setLoading(true)
       Contract.getCorgisList({ owner })
-        .then((corgis) =>
-          dispatchContract({ type: 'GET_CORGISLIST_SUCCESS', corgis })
-        )
-        .catch((error) => dispatchContract({ type: 'FAIL', error }));
+        .then((corgis) => {
+          setCorgis(corgis)
+          setLoading(false)
+        })
+        .catch((error) => setError(error));
     },
     [Contract]
   );
 
   const getCorgi = useCallback(
     (id) => {
-      dispatchContract({ type: 'START' });
+      setLoading(true)
       Contract.getCorgi({ id })
-        .then((corgi) => dispatchContract({ type: 'GET_CORGI_SUCCESS', corgi }))
-        .catch((error) => dispatchContract({ type: 'FAIL', error }));
+        .then((corgi) => {
+          setCorgi(corgi)
+          setLoading(false)
+        })
+        .catch((error) => setError(error));
     },
     [Contract]
   );
 
   const getDisplayCorgis = useCallback(() => {
-    dispatchContract({ type: 'START' });
+    setLoading(true)
     Contract.displayGolbalCorgis()
-      .then((corgis) =>
-        dispatchContract({ type: 'GET_DISPLAY_CORGIS', corgis })
-      )
-      .catch((error) => dispatchContract({ type: 'FAIL', error }));
+      .then((corgis) => {
+        setDisplay(corgis)
+        setLoading(false)
+      })
+      .catch((error) => setError(error));
   }, [Contract]);
 
   const value = {
-    loading: contractState.loading,
-    error: contractState.error,
-    corgis: contractState.corgis,
-    displayCorgis: contractState.displayCorgis,
-    creating: contractState.creating,
-    created: contractState.created,
-    transfering: contractState.transfering,
-    deleting: contractState.deleting,
-    corgi: contractState.corgi,
-    info: contractState.info,
-    clear,
-    getCorgi,
-    getCorgisList,
+    loading,
+    error,
+    corgi,
+    corgis,
+    displayCorgis,
+    creating,
+    created,
+    transfering,
+    deleting,
     createCorgi,
     deleteCorgi,
     transferCorgi,
+    getCorgi,
+    getCorgisList,
     getDisplayCorgis,
   };
 

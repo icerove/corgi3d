@@ -7,8 +7,8 @@ export default () => (
     <div className="left">
       <img src={nearLogo} alt="" style={{ height: "7em" }} />
       <div className="text">
-        <p>Crypto Corgis was created to demonstrate the NFT</p>
-        <p>capabilities of NEAR Protocol. </p>
+        <p>Crypto Corgis was NFT </p>
+        <p>built on NEAR Protocol. </p>
         <p>
           Learn more at
           <a
@@ -24,7 +24,7 @@ export default () => (
       </div>
     </div>
     <div className="right">
-      <p>© 2019 Near Protocol </p>
+      <p>© new Date().getFullYear() Near Protocol </p>
       <p>All Rights Reserved.</p>
       <p className="blue">
         Privacy Policy <span className="black"> | </span> Terms of Use
