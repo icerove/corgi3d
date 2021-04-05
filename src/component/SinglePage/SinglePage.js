@@ -18,7 +18,8 @@ export default () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
   const { corgi, loading, getCorgi, transfering } = useContract;
-  const id = Number(window.location.hash.slice(-2))
+  const id = Number(window.location.pathname.slice(-2))
+
   useEffect(() => {
     if (id) {
       getCorgi(id);
@@ -37,10 +38,6 @@ export default () => {
     setSend(false);
     setShare(false);
   };
-
-  if (corgi && corgi.owner !== nearContext.user.accountId) {
-    return <Redirect to="/account" />;
-  }
 
   if (!nearContext.user) {
     return <Redirect to="/" />;
@@ -65,7 +62,7 @@ export default () => {
         <h1>Meet {corgi.name}!</h1>
         <div>
           <BigCard
-            backgroundColor={corgi.backgroundColor}
+            backgroundColor={corgi.background_color}
             color={corgi.color}
             sausage={corgi.sausage}
             quote={corgi.quote}

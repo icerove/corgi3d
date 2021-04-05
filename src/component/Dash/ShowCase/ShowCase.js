@@ -3,17 +3,14 @@ import React from "react";
 
 import DashCard from "./DashCard/DashCard";
 
-export default ({ displayCorgis }) => {
-  let Corgis = displayCorgis.map((corgi) => {
+export default ({ displayCorgis, getCorgiOwner }) => {
+  let Corgis = displayCorgis.slice(0,9).map((corgi) => {
     return (
       <Link
-        to={{
-          pathname: "/share",
-          hash: corgi.color + corgi.background_color + corgi.id
-        }}
+        to={`/share/${corgi.id}`}
         key={corgi.id}
       >
-        <DashCard corgi={corgi} />
+        <DashCard corgi={corgi} getCorgiOwner={getCorgiOwner}/>
       </Link>
     );
   });

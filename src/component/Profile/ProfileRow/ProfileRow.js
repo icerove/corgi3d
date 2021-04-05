@@ -14,6 +14,7 @@ export default ({ corgi, deleteCorgi }) => {
   if (!corgi) {
     return <Redirect to="/profile" />;
   }
+
   const rate = corgi.rate;
   let show;
   if (rate === "COMMON") {
@@ -38,10 +39,7 @@ export default ({ corgi, deleteCorgi }) => {
       }}
     >
       <Link
-        to={{
-          pathname: "/@" + corgi.name,
-          hash: corgi.color + corgi.background_color + corgi.id
-        }}
+        to={`/corgi/${corgi.id}`}
         key={corgi.id}
       >
         {show}
@@ -57,6 +55,7 @@ export default ({ corgi, deleteCorgi }) => {
             <GiDiscussion style={{ color: "#9437ff" }} />
             {corgi.message ? corgi.message : "This lovely corgi is for you"}
           </p>
+          <Button description="delete" action={() => deleteCorgi(corgi.id)}/>
         </div>
       </div>
     </div>

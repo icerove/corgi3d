@@ -15,7 +15,8 @@ export default () => {
   const [copied, setCopied] = useState(false);
   const useContract = useContext(ContractContext);
   const { corgi, getCorgi, loading } = useContract;
-  const id = window.location.hash.slice(1);
+  const id = Number(window.location.pathname.slice(-2))
+
   useEffect(() => {
     if (id) {
       getCorgi(id);
@@ -40,7 +41,7 @@ export default () => {
     show = "ULTRA RARE";
   }
 
-  const address = window.location.origin + "/share" + window.location.hash;
+  const address = window.location.origin + "/share/" + corgi.id;
   const sausage = Number(corgi.sausage).toFixed(4);
 
   return (
@@ -48,7 +49,7 @@ export default () => {
       <h1>Meet {corgi.name}!</h1>
       <div>
         <BigCard
-          backgroundColor={corgi.backgroundColor}
+          backgroundColor={corgi.background_color}
           color={corgi.color}
           sausage={corgi.sausage}
           quote={corgi.quote}

@@ -9,8 +9,10 @@ import ShowCase from "./ShowCase/ShowCase";
 export default () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
-  const { getDisplayCorgis, displayCorgis } = useContract;
+  const { getDisplayCorgis, displayCorgis, getCorgiOwner } = useContract;
+
   useEffect(() => getDisplayCorgis(), [getDisplayCorgis]);
+  
   const signIn = () => {
     nearContext.signIn();
   };
@@ -22,7 +24,7 @@ export default () => {
         isLoading={nearContext.isLoading}
         user={nearContext.user}
       />
-      <ShowCase displayCorgis={displayCorgis} />
+      <ShowCase displayCorgis={displayCorgis} getCorgiOwner={getCorgiOwner} />
       <style>{`
             .Dash {
                 width: 100%;

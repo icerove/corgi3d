@@ -1,15 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import Corgi from "../../../CorgiCard/Corgi/Corgi";
 import { Dialogue } from "../../../CorgiCard/Card";
 
-export default ({ corgi }) => {
+export default ({ corgi, getCorgiOwner }) => {
+  console.log(corgi)
+  const [owner, setOwner] = useState(null)
+
+  useEffect(() => {
+    async function getOwner() {
+      let owner = await getCorgiOwner(corgi.id)
+      setOwner(owner)
+    }
+    getOwner()
+  })
+
   return (
     <div className="creation">
       <div className="corgiboard">
         <div
           style={{
-            backgroundColor: corgi.backgroundColor,
+            backgroundColor: corgi.background_color,
             padding: "10px",
             display: "inline-block",
             borderRadius: "10px",
@@ -21,7 +32,7 @@ export default ({ corgi }) => {
       </div>
       <p className="dogname">{corgi.name}</p>
       <p className="address">
-        Created by <span className="orange">@{corgi.owner}</span>
+        Created by <span className="orange">@{owner}</span>
       </p>
       <style>{`
             .creation {

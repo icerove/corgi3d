@@ -15,7 +15,7 @@ export default ({ corgi, show, closeModal, transfering }) => {
           <div>
             <div style={{ width: "100%", height: "90%" }}>
               <SmallCard
-                backgroundColor={corgi.backgroundColor}
+                backgroundColor={corgi.background_color}
                 color={corgi.color}
                 sausage={corgi.sausage}
                 quote={corgi.quote}

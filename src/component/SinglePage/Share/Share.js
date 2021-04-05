@@ -8,29 +8,21 @@ import Modal from "../../utils/Modal";
 
 export default ({ corgi, show, closeModal }) => {
   const [copied, setCopied] = useState(false);
-  const address = window.location.origin + "/share" + window.location.hash;
+  const address = window.location.origin + "/share/" + corgi.id;
 
   return (
     <Modal show={show} Close={closeModal}>
-      <div style={{ width: "100%", height: "100%", marginBottom: "10px" }}>
+      <div style={{ width: "100%", height: "100%", marginBottom: "30px" }}>
         <h3>Share a Corgi</h3>
         <p>Click the card to see the share page</p>
         <div>
           <div style={{ width: "100%", height: "90%" }}>
-            <Link
-              to={{
-                pathname: "/share",
-                hash: corgi.color + corgi.background_color + corgi.sausage
-              }}
-              key={corgi.id}
-            >
               <SmallCard
-                backgroundColor={corgi.backgroundColor}
+                backgroundColor={corgi.background_color}
                 color={corgi.color}
                 sausage={corgi.sausage}
                 quote={corgi.quote}
               />
-            </Link>
           </div>
           <p style={{ margin: "0" }}>{corgi.name}</p>
           <span style={{ color: "orange", fontSize: "0.7rem" }}>
@@ -38,7 +30,7 @@ export default ({ corgi, show, closeModal }) => {
           </span>
           <hr />
         </div>
-        <div style={{ marginBottom: "10px" }}>
+        <div style={{ marginBottom: "20px" }}>
           <p
             style={{
               backgroundColor: "white",
@@ -67,12 +59,12 @@ export default ({ corgi, show, closeModal }) => {
             <span style={{ color: "#961be0", marginLeft: "5px" }}>Copied.</span>
           )}
         </div>
-        <div style={{ marginBottom: "10px" }}>
+       {/* <div style={{ marginBottom: "10px" }}>
           <p style={{ color: "#999" }}>or share directly on</p>
           <div style={{ display: "flex", justifyContent: "space between" }}>
-            <div class="sharethis-inline-share-buttons"></div>
+            <div class="share-this-inline-share-buttons"></div>
           </div>
-        </div>
+        </div> */}
       </div>
     </Modal>
   );

@@ -23,8 +23,8 @@ export default () => {
         <Route exact path="/generation" component={Generation} />
         <Route exact path="/account" component={Account} />
         <Route exact path="/profile" component={Profile} />
-        <Route exact path="/@:name" component={SinglePage} />
-        <Route exact path="/share" component={SharePage} />
+        <Route exact path="/corgi/:id" component={SinglePage} />
+        <Route exact path="/share/:id" component={SharePage} />
         <Route
           render={() => (
             <h1>

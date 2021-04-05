@@ -34,10 +34,7 @@ export default () => {
     Corgis = corgis.map((corgi) => {
       return (
           <Link
-            to={{
-              pathname: "/@" + corgi.name,
-              hash: corgi.color + corgi.background_color + corgi.id
-            }}
+            to={`/corgi/${corgi.id}`}
             key={corgi.id}
           >
             <AccountCard corgi={corgi} />

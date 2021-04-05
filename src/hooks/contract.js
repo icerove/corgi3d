@@ -78,6 +78,13 @@ export const ContractContextProvider = ({ Contract, children }) => {
     [Contract]
   );
 
+  const getCorgiOwner = useCallback(
+    async (id) => {
+      return await Contract.get_token_owner({token_id: id})
+    },
+    [Contract]
+  )
+
   const getDisplayCorgis = useCallback(() => {
     setLoading(true)
     Contract.display_global_corgis()
@@ -105,6 +112,7 @@ export const ContractContextProvider = ({ Contract, children }) => {
     getCorgi,
     getCorgisList,
     getDisplayCorgis,
+    getCorgiOwner
   };
 
   return (
