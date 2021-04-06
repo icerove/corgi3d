@@ -59,7 +59,7 @@ export default () => {
     initialState
   );
 
-  const id = window.location.hash.slice(1);
+  const id = Number(window.location.pathname.slice(-2))
 
   const checkAccountLegit = async (value) => {
     try {

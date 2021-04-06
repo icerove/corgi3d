@@ -10,7 +10,7 @@ export default ({ corgi, show, closeModal, transfering }) => {
   return (
     <Modal show={show} Close={closeModal}>
       {!transfering ? (
-        <div style={{ width: "100%", height: "100%" }}>
+        <div style={{ width: "100%", height: "100%", marginBottom: '30px' }}>
           <h3>Send a Corgi</h3>
           <div>
             <div style={{ width: "100%", height: "90%" }}>

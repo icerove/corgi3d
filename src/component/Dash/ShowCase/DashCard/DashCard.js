@@ -4,7 +4,6 @@ import Corgi from "../../../CorgiCard/Corgi/Corgi";
 import { Dialogue } from "../../../CorgiCard/Card";
 
 export default ({ corgi, getCorgiOwner }) => {
-  console.log(corgi)
   const [owner, setOwner] = useState(null)
 
   useEffect(() => {

@@ -14,14 +14,26 @@ export default () => {
   const nearContext = useContext(NearContext);
   const [copied, setCopied] = useState(false);
   const useContract = useContext(ContractContext);
-  const { corgi, getCorgi, loading } = useContract;
+  const { corgi, getCorgi, loading, getCorgiOwner } = useContract;
   const id = Number(window.location.pathname.slice(-2))
+
+  const [owner, setOwner] = useState(null)
 
   useEffect(() => {
     if (id) {
       getCorgi(id);
     }
   }, [getCorgi, id]);
+
+  useEffect(() => {
+    async function getOwner() {
+      let owner = await getCorgiOwner(corgi.id)
+      setOwner(owner)
+    }
+    if(corgi){
+      getOwner()
+    }
+  })
 
   if (!corgi || loading) {
     return <Spinner />;
@@ -63,7 +75,7 @@ export default () => {
         <div>
           <p>
             <GiImperialCrown style={{ color: "#9437ff", fontSize: "1.1rem" }} />
-            Owner: {corgi.owner}
+            Owner: {owner}
           </p>
           <p>
             <GiBowTieRibbon style={{ color: "#9437ff", fontSize: "1.2rem" }} />

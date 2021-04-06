@@ -27,7 +27,9 @@ export const ContractContextProvider = ({ Contract, children }) => {
           setCreating(false)
           setCreated(true)
         })
-        .catch((error) => setError(error));
+        .catch((error) => {
+          console.log(error)
+          setError(error)});
     },
     [Contract]
   );
@@ -35,9 +37,11 @@ export const ContractContextProvider = ({ Contract, children }) => {
   const transferCorgi = useCallback(
     (receiver, id, message) => {
       setTransfering(true)
-      Contract.transfer_with_message({ receiver, id, message }, BOATLOAD_OF_GAS)
+      Contract.transfer_with_message({ new_owner_id:receiver, token_id:id, message }, BOATLOAD_OF_GAS)
         .then(() => setTransfering(false))
-        .catch((error) => setError(error));
+        .catch((error) => {
+          console.log(error)
+          setError(error)});
     },
     [Contract]
   );
@@ -47,7 +51,9 @@ export const ContractContextProvider = ({ Contract, children }) => {
       setDeleting(true)
       Contract.delete_corgi({ id }, BOATLOAD_OF_GAS)
         .then(() => setDeleting(false))
-        .catch((error) => setError(error));
+        .catch((error) => {
+          console.log(error)
+          setError(error)});
     },
     [Contract]
   );
@@ -60,7 +66,9 @@ export const ContractContextProvider = ({ Contract, children }) => {
           setCorgis(corgis)
           setLoading(false)
         })
-        .catch((error) => setError(error));
+        .catch((error) => {
+          console.log(error)
+          setError(error)});
     },
     [Contract]
   );
@@ -73,7 +81,9 @@ export const ContractContextProvider = ({ Contract, children }) => {
           setCorgi(corgi)
           setLoading(false)
         })
-        .catch((error) => setError(error));
+        .catch((error) => {
+          console.log(error)
+          setError(error)});
     },
     [Contract]
   );
@@ -92,7 +102,9 @@ export const ContractContextProvider = ({ Contract, children }) => {
         setDisplay(corgis)
         setLoading(false)
       })
-      .catch((error) => setError(error));
+      .catch((error) => {
+        console.log(error)
+        setError(error)});
   }, [Contract]);
 
   const value = {
