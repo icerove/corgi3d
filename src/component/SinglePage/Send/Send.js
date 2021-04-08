@@ -34,7 +34,7 @@ export default ({ corgi, show, closeModal, transfering }) => {
           <CorgiThree color={corgi.color} />
           <style>{`
             .box {
-
+              height: 50%;
               padding-top: 30px;
               animation-name: spin;
               animation-duration: 1000ms;

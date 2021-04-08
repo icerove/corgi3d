@@ -10,9 +10,10 @@ import {
   GiGlassBall,
 } from "react-icons/gi";
 
-export default ({ corgi, deleteCorgi }) => {
-  if (!corgi) {
-    return <Redirect to="/profile" />;
+export default ({ corgi, deleteCorgi, deleted, setDeleted }) => {
+  if (deleted) {
+    setDeleted(false)
+    return <Redirect push to="/account" />;
   }
 
   const rate = corgi.rate;

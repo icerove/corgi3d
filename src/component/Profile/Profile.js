@@ -12,7 +12,7 @@ import { CorgiTwo } from "../utils/corgiAnimation";
 export default () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
-  const { corgis, loading, deleteCorgi, deleting, error } = useContract;
+  const { corgis, loading, deleteCorgi, deleting, deleted, setDeleted, error } = useContract;
 
   if (!nearContext.user) {
     return <Redirect to="/" />;
@@ -27,7 +27,13 @@ export default () => {
   if (corgis && corgis.length > 0) {
     Corgis = corgis.map((corgi) => {
       return (
-        <ProfileRow deleteCorgi={deleteCorgi} corgi={corgi} key={corgi.id} />
+        <ProfileRow 
+          deleteCorgi={deleteCorgi} 
+          corgi={corgi} 
+          key={corgi.id} 
+          deleted={deleted}
+          setDeleted={setDeleted}  
+        />
       );
     });
   }

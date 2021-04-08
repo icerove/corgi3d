@@ -13,6 +13,7 @@ export const ContractContextProvider = ({ Contract, children }) => {
   const [created, setCreated] = useState(false)
   const [transfering, setTransfering] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [deleted, setDeleted] = useState(false)
 
   const [corgis, setCorgis] = useState(null)
   const [corgi, setCorgi] = useState(null)
@@ -50,7 +51,10 @@ export const ContractContextProvider = ({ Contract, children }) => {
     (id) => {
       setDeleting(true)
       Contract.delete_corgi({ id }, BOATLOAD_OF_GAS)
-        .then(() => setDeleting(false))
+        .then(() => {  
+          setDeleting(false)
+          setDeleted(true)
+        })
         .catch((error) => {
           console.log(error)
           setError(error)});
@@ -117,6 +121,8 @@ export const ContractContextProvider = ({ Contract, children }) => {
     created,
     transfering,
     deleting,
+    deleted,
+    setDeleted,
     setCreated,
     createCorgi,
     deleteCorgi,

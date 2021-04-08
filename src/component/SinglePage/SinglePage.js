@@ -57,7 +57,11 @@ export default () => {
   if (!corgi || loading) {
     return <Spinner />;
   }
-  if (!id || (owner !==nearContext.user.accountId)) {
+  if (!id || ( owner && owner !==nearContext.user.accountId)) {
+    console.log(id)
+    console.log(owner)
+    console.log(nearContext.user.accountId)
+    console.log('come here')
     return <Redirect to="/account" />;
   }
 
