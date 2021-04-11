@@ -92,6 +92,7 @@ export default () => {
       <IoIosCloseCircleOutline
         style={{
           position: "relative",
+          top: "5px",
           left: "-30px",
           fontSize: "1.5rem",
           color: "Salmon",
@@ -105,6 +106,7 @@ export default () => {
         <IoIosCheckmarkCircleOutline
           style={{
             position: "relative",
+            top: "5px",
             left: "-30px",
             fontSize: "1.5rem",
             color: "#78e3a7",

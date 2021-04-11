@@ -1,11 +1,11 @@
 import React from "react";
 
-import nearLogo from "../../assets/images/near_logo_stack.png";
+import nearLogo from "../../assets/images/near_logo.png";
 
 export default () => (
   <div className="footer">
     <div className="left">
-      <img src={nearLogo} alt="" style={{ height: "7em" }} />
+      <img src={nearLogo} alt="" style={{ width: "5em",  height: "5em" }} />
       <div className="text">
         <p>Crypto Corgis NFT </p>
         <p>built on NEAR Protocol. </p>

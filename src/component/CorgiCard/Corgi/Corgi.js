@@ -9,7 +9,7 @@ export default ({ color, sausage }) => (
 const CorgiGroup = ({ color, sausage, width = "100%", height = "100%" }) => {
   const sa = Number(sausage);
   let len = sa + 220;
-  let lenW = sa + 520;
+  let lenW = sa + 522;
   return (
     <>
       <svg
@@ -107,12 +107,14 @@ const CorgiGroup = ({ color, sausage, width = "100%", height = "100%" }) => {
                 id="Path"
                 fill="#FFFFFF"
                 points={`${sa} 1.00515726 0 1.00515726 0 183.943779 ${sa} 183.943779`}
+                shape-rendering="crispEdges"
               ></polygon>
               <polygon
                 id="Path"
                 fill="#231F20"
                 opacity="0.15"
                 points={`${sa} 169.871577 0 169.871577 0 183.943779 ${sa} 183.943779`}
+                shape-rendering="crispEdges"
               ></polygon>
               <rect
                 id="Rectangle"
@@ -120,37 +122,42 @@ const CorgiGroup = ({ color, sausage, width = "100%", height = "100%" }) => {
                 opacity="0.2"
                 x="1.5"
                 y="210.077867"
-                width={sausage - 1.5}
+                width={sa-1}
                 height="25.1289315"
+                shape-rendering="crispEdges"
               ></rect>
               <path
                 d="M0,141.224595 L56.2091743,141.224595"
                 id="Path"
                 fill={color}
+                shape-rendering="crispEdges"
               ></path>
               <polygon
                 id="Path"
                 fill={color}
                 points={`${sa} 1.00515726 0 1.00515726 0 140.722016 ${sa} 140.722016`}
+                shape-rendering="crispEdges"
               ></polygon>
               <rect
                 id="Rectangle"
                 fill="#231F20"
                 x="0"
                 y="0"
-                width={sausage}
+                width={sa}
                 height="2.01031452"
+                shape-rendering="crispEdges"
               ></rect>
               <rect
                 id="Rectangle"
                 fill="#231F20"
                 x="0"
                 y="182.938621"
-                width={sausage}
+                width={sa}
                 height="2.01031452"
+                shape-rendering="crispEdges"
               ></rect>
             </g>
-            <g id="corgi-back" transform={`translate(${len}, 18.5)`}>
+            <g id="corgi-back" transform={`translate(${len}, 19)`}>
               <path
                 d="M0,354.929178 C109.065062,354.929178 194.34855,349.526479 194.34855,342.863597 C194.34855,336.200715 109.065062,330.798016 0,330.798016 L0,354.929178 Z"
                 id="Path"
@@ -273,6 +280,7 @@ const CorgiGroup = ({ color, sausage, width = "100%", height = "100%" }) => {
                 id="Path"
                 fill="#231F20"
                 opacity="0.1"
+                className="tougue"
               ></path>
               <path
                 d="M41.3182781,135.356113 C41.3182781,135.356113 44.7220809,146.929844 54.7185853,150.431141 C64.7150897,153.932437 79.1552553,156.391682 91.1621524,136.585735 C103.16905,116.779788 99.0165488,115.001351 91.9247152,123.330825 C84.8328816,131.660299 76.4169618,141.469488 63.3563416,139.024138 C50.2957214,136.578788 41.3182781,135.356113 41.3182781,135.356113 Z"
@@ -440,6 +448,7 @@ const CorgiGroup = ({ color, sausage, width = "100%", height = "100%" }) => {
           0% { transform: rotate(1deg); }
           100% { transform: rotate(-1deg); }
       }
+
       .tougue {
         animation: move linear 0.2s infinite alternate;
         transform-origin: top;

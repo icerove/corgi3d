@@ -20,7 +20,7 @@ export default ({ show, Close, children }) => {
                         background-color: #f8f8f8;
                         max-width: 600px;
                         width: 60%;
-                        height: 70%;
+                        // height: 70%;
                         max-height: 570px;
                         border: 1px solid #ccc;
                         border-radius: 10px;
