@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ action, description, disabled = false }) => {
+const Button = ({ action, description, disabled = false }) => {
   return (
     <button className="Button" onClick={action} disabled={disabled}>
       {description}
@@ -33,3 +33,4 @@ export default ({ action, description, disabled = false }) => {
     </button>
   );
 };
+export default Button

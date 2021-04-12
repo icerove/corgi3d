@@ -48,7 +48,7 @@ const transferReducer = (currentState, action) => {
   }
 };
 
-export default () => {
+const Transfer = () => {
   const nearContext = useContext(NearContext);
   const connection = nearContext.nearContent.connection;
   const useContract = useContext(ContractContext);
@@ -172,3 +172,5 @@ export default () => {
     </div>
   );
 };
+
+export default Transfer

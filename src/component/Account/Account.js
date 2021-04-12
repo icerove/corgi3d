@@ -8,7 +8,7 @@ import Spinner from "../utils/Spinner";
 import AccountCard from "./AccountCard/AccountCard";
 import Generation from "../Generation/Generation"
 
-export default () => {
+const Account = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
   const { loading, getCorgisList } = useContract;
@@ -52,3 +52,5 @@ export default () => {
     </div>
   );
 };
+
+export default Account

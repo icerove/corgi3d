@@ -6,7 +6,7 @@ import Modal from "../../utils/Modal";
 import Transfer from "./Transafer/Transfer";
 import { CorgiThree } from "../../utils/corgiAnimation";
 
-export default ({ corgi, show, closeModal, transfering }) => {
+const Send = ({ corgi, show, closeModal, transfering }) => {
   return (
     <Modal show={show} Close={closeModal}>
       {!transfering ? (
@@ -55,3 +55,5 @@ export default ({ corgi, show, closeModal, transfering }) => {
     </Modal>
   );
 };
+
+export default Send

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import Button from "../../utils/Button";
 import IconNav from "../../../assets/images/icon-nav.svg";
 
-export default ({ number, accountName, requestSignOut }) => {
+const Nav = ({ number, accountName, requestSignOut }) => {
   return (
     <div className="wrap">
       <div className="account">
@@ -137,3 +137,5 @@ const AddCorgi = () => (
     <img src={IconNav} alt="" />
   </div>
 );
+
+export default Nav

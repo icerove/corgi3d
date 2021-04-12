@@ -6,7 +6,7 @@ import shadow from "../../../assets/images/shadow.svg";
 
 let tinycolor = require("tinycolor2");
 
-export default ({ backgroundColor, color }) => {
+const Screen = ({ backgroundColor, color }) => {
   let textColor = tinycolor
     .mostReadable(backgroundColor, [color, "#fff", "#000"])
     .toHexString();
@@ -66,3 +66,4 @@ export default ({ backgroundColor, color }) => {
     </div>
   );
 };
+export default Screen

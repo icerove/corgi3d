@@ -2,7 +2,7 @@ import React from "react";
 
 import nearLogo from "../../assets/images/near_logo.png";
 
-export default () => (
+const Footer = () => (
   <div className="footer">
     <div className="left">
       <img src={nearLogo} alt="" style={{ width: "5em",  height: "5em" }} />
@@ -77,3 +77,5 @@ export default () => (
     `}</style>
   </div>
 );
+
+export default Footer

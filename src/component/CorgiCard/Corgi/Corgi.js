@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ color, sausage }) => (
+const Corgi = ({ color, sausage }) => (
   <div style={{ width: "100%", margin: "auto" }}>
     <CorgiGroup color={color} sausage={sausage} />
   </div>
@@ -464,3 +464,5 @@ const CorgiGroup = ({ color, sausage, width = "100%", height = "100%" }) => {
     </>
   );
 };
+
+export default Corgi

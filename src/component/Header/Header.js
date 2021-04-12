@@ -10,7 +10,7 @@ import logo from "../../assets/images/logo.png";
 import Spinner from "../utils/Spinner";
 import Button from "../utils/Button";
 
-export default () => {
+const Header = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
   const { getCorgisList, corgis } = useContract;
@@ -85,3 +85,4 @@ export default () => {
     </div>
   );
 };
+export default Header

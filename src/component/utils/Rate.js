@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ rate }) => {
+const Rate = ({ rate }) => {
   let gray = "#E6E6E6";
   let orange = "#FBB040";
   let common = (
@@ -155,3 +155,4 @@ export default ({ rate }) => {
     </div>
   );
 };
+export default Rate

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ color }) => (
+const Egg = ({ color }) => (
   <div
     style={{
       width: "100%",
@@ -57,3 +57,4 @@ export default ({ color }) => (
     </svg>
   </div>
 );
+export default Egg

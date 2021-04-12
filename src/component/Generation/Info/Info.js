@@ -10,7 +10,7 @@ import { GiGreekSphinx, GiBeachBall } from 'react-icons/gi';
 const generate = require('project-name-generator');
 const randomColor = require('randomcolor');
 
-export default ({ setColor, color, setBackgroundColor, backgroundColor }) => {
+const Info = ({ setColor, color, setBackgroundColor, backgroundColor }) => {
   const { name, quote, setName, setQuote } = useCharacter();
   useEffect(() => setQuote(), [setQuote]);
   const useContract = useContext(ContractContext);
@@ -192,3 +192,4 @@ export default ({ setColor, color, setBackgroundColor, backgroundColor }) => {
     </div>
   );
 };
+export default Info

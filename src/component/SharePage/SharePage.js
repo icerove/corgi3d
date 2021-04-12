@@ -10,7 +10,7 @@ import { BigCard } from "../CorgiCard/Card";
 import Spinner from "../utils/Spinner";
 import { Common, Uncommon, Rare, VeryRare } from "../utils/Photo";
 
-export default () => {
+const SharePage = () => {
   const nearContext = useContext(NearContext);
   const [copied, setCopied] = useState(false);
   const useContract = useContext(ContractContext);
@@ -120,3 +120,5 @@ export default () => {
     </div>
   );
 };
+
+export default SharePage

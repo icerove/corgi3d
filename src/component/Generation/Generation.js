@@ -9,7 +9,7 @@ import Info from './Info/Info';
 import Screen from './Screen/Screen';
 import Animation from './Animation/Animation';
 
-export default () => {
+const Generation = () => {
   const nearContext = useContext(NearContext);
   const {
     color,
@@ -18,7 +18,7 @@ export default () => {
     setBackgroundColor,
   } = useCharacter();
   const useContract = useContext(ContractContext);
-  const { creating, created, error, setCreated } = useContract;
+  const { creating, created, setCreated } = useContract;
 
   if (!nearContext.user) {
     return <Redirect to="/" />;
@@ -71,3 +71,4 @@ export default () => {
     </div>
   );
 };
+export default Generation

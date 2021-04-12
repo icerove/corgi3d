@@ -14,7 +14,7 @@ import Rate from "../utils/Rate";
 import iconSend from "../../assets/images/icon-send.svg";
 import iconShare from "../../assets/images/icon-share.svg";
 
-export default () => {
+const SinglePage = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
   const { corgi, loading, getCorgi, transfering, getCorgiOwner } = useContract;
@@ -150,6 +150,8 @@ export default () => {
     </div>
   );
 };
+
+export default SinglePage
 
 const SendAndShare = ({ openShareModal, openSendModal }) => {
   let style = { display: "flex", flexDirection: "column", width: "300px" };

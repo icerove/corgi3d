@@ -6,7 +6,7 @@ import { ContractContext } from "../../hooks/contract";
 import Poster from "./Poster/Poster";
 import ShowCase from "./ShowCase/ShowCase";
 
-export default () => {
+const Dash = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
   const { getDisplayCorgis, displayCorgis, getCorgiOwner } = useContract;
@@ -36,3 +36,5 @@ export default () => {
     </div>
   );
 };
+
+export default Dash

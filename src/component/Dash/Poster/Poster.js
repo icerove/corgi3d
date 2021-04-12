@@ -6,7 +6,7 @@ import Spinner from "../../utils/Spinner";
 import corgiFull from "../../../assets/images/corgi-full.png";
 import sample from "../../../assets/images/rarity-sample.svg";
 
-export default ({ requestSignIn, isLoading, user }) => {
+const Poster = ({ requestSignIn, isLoading, user }) => {
   let showButton;
   if (isLoading) {
     return <Spinner />;
@@ -136,3 +136,5 @@ export default ({ requestSignIn, isLoading, user }) => {
     </div>
   );
 };
+
+export default Poster

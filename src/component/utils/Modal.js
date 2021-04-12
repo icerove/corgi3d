@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ show, Close, children }) => {
+const Modal = ({ show, Close, children }) => {
   return (
     <div>
       {show ? <div className="Backdrop" onClick={Close}></div> : null}
@@ -50,3 +50,5 @@ export default ({ show, Close, children }) => {
     </div>
   );
 };
+
+export default Modal

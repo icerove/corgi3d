@@ -3,7 +3,7 @@ import React from "react";
 import Corgi from "../../CorgiCard/Corgi/Corgi";
 import { Dialogue } from "../../CorgiCard/Card";
 
-export default ({ corgi }) => (
+const AccountCard = ({ corgi }) => (
   <div className="creation">
     <div className="corgiboard">
       <div
@@ -59,3 +59,5 @@ export default ({ corgi }) => (
             `}</style>
   </div>
 );
+
+export default AccountCard

@@ -4,7 +4,7 @@ import { CorgiFour } from "../../utils/corgiAnimation";
 import raritySample from "../../../assets/images/rarity-sample.svg";
 import shadow from "../../../assets/images/shadow.svg";
 
-export default ({ color, backgroundColor }) => (
+const Animation = ({ color, backgroundColor }) => (
   <div>
     <h3>Generating...</h3>
     <div className="back" style={{ background: backgroundColor }}>
@@ -67,3 +67,4 @@ export default ({ color, backgroundColor }) => (
         `}</style>
   </div>
 );
+export default Animation

@@ -3,7 +3,7 @@ import React from "react";
 
 import DashCard from "./DashCard/DashCard";
 
-export default ({ displayCorgis, getCorgiOwner }) => {
+const ShowCase = ({ displayCorgis, getCorgiOwner }) => {
   let Corgis = displayCorgis.slice(-9).map((corgi) => {
     return (
       <Link
@@ -16,3 +16,5 @@ export default ({ displayCorgis, getCorgiOwner }) => {
   });
   return <div>{Corgis}</div>;
 };
+
+export default ShowCase

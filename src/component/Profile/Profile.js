@@ -9,7 +9,7 @@ import Spinner from "../utils/Spinner";
 
 import { CorgiTwo } from "../utils/corgiAnimation";
 
-export default () => {
+const Profile = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
   const { corgis, loading, deleteCorgi, deleting, deleted, setDeleted, error } = useContract;
@@ -69,3 +69,4 @@ export default () => {
     </div>
   );
 };
+export default Profile

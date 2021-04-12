@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+const Spinner = () => (
   <div className="loader">
     <style>{`
     .loader {
@@ -70,3 +70,4 @@ export default () => (
   `}</style>
   </div>
 );
+export default Spinner

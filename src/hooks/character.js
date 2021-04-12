@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Quotes from '../assets/quotes/quotes.json';
 const randomColor = require('randomcolor');
 const generate = require('project-name-generator');

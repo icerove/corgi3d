@@ -10,7 +10,7 @@ import {
   GiGlassBall,
 } from "react-icons/gi";
 
-export default ({ corgi, deleteCorgi, deleted, setDeleted }) => {
+const ProfileRow = ({ corgi, deleteCorgi, deleted, setDeleted }) => {
   if (deleted) {
     setDeleted(false)
     return <Redirect push to="/account" />;
@@ -62,3 +62,4 @@ export default ({ corgi, deleteCorgi, deleted, setDeleted }) => {
     </div>
   );
 };
+export default ProfileRow

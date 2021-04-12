@@ -14,7 +14,7 @@ import SharePage from "./component/SharePage/SharePage";
 import Header from "./component/Header/Header";
 import Footer from "./component/Footer/Footer";
 
-export default () => {
+const App = () => {
   return (
     <div className="App">
       <Header />
@@ -56,3 +56,5 @@ export default () => {
     </div>
   );
 };
+
+export default App

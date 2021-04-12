@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import Corgi from "../../../CorgiCard/Corgi/Corgi";
 import { Dialogue } from "../../../CorgiCard/Card";
 
-export default ({ corgi, getCorgiOwner }) => {
+const DashCard = ({ corgi, getCorgiOwner }) => {
   const [owner, setOwner] = useState(null)
 
   useEffect(() => {
@@ -73,3 +73,5 @@ export default ({ corgi, getCorgiOwner }) => {
     </div>
   );
 };
+
+export default DashCard
