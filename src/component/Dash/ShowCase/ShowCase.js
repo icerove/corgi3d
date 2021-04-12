@@ -3,14 +3,14 @@ import React from "react";
 
 import DashCard from "./DashCard/DashCard";
 
-const ShowCase = ({ displayCorgis, getCorgiOwner }) => {
+const ShowCase = ({ displayCorgis }) => {
   let Corgis = displayCorgis.map((corgi) => {
     return (
       <Link
         to={`/share/${corgi.id}`}
         key={corgi.id}
       >
-        <DashCard corgi={corgi} getCorgiOwner={getCorgiOwner}/>
+        <DashCard corgi={corgi}/>
       </Link>
     );
   });

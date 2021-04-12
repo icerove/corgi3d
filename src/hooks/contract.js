@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
 
 const BOATLOAD_OF_GAS = 300000000000000
+const PRICE = '3000000000000000000000000'
 
 export const ContractContext = React.createContext();
 
 export const ContractContextProvider = ({ Contract, children }) => {
-
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -23,7 +23,7 @@ export const ContractContextProvider = ({ Contract, children }) => {
     (name, color, backgroundColor, quote) => {
       setCreating(true)
       Contract.create_corgi(
-        { name, color, background_color: backgroundColor, quote },BOATLOAD_OF_GAS)
+        { name, color, background_color: backgroundColor, quote },BOATLOAD_OF_GAS, PRICE)
         .then(() => {
           setCreating(false)
           setCreated(true)
@@ -63,31 +63,11 @@ export const ContractContextProvider = ({ Contract, children }) => {
   );
 
   const getCorgisList = useCallback(
-    (owner) => {
+    async (owner) => {
       setLoading(true)
-      Contract.get_corgis_by_owner({ owner })
-        .then((corgis) => {
-          setCorgis(corgis)
-          setLoading(false)
-        })
-        .catch((error) => {
-          console.log(error)
-          setError(error)});
-    },
-    [Contract]
-  );
-
-  const getCorgi = useCallback(
-    (id) => {
-      setLoading(true)
-      Contract.get_corgi({ id })
-        .then((corgi) => {
-          setCorgi(corgi)
-          setLoading(false)
-        })
-        .catch((error) => {
-          console.log(error)
-          setError(error)});
+      let corgis = Contract.get_corgis_by_owner({ owner })
+      setCorgis(corgis)
+      setLoading(false)
     },
     [Contract]
   );
@@ -99,16 +79,24 @@ export const ContractContextProvider = ({ Contract, children }) => {
     [Contract]
   )
 
-  const getDisplayCorgis = useCallback(() => {
+  const getCorgi = useCallback(
+    async (id) => {
+      setLoading(true)
+      let _corgi = await Contract.get_corgi({ id })
+      let owner = await getCorgiOwner(_corgi.id)
+      _corgi.owner = owner
+      setCorgi(_corgi)
+      setLoading(false)
+    },
+    [Contract, getCorgiOwner]
+  );
+
+  const getDisplayCorgis = useCallback(
+    async () => {
     setLoading(true)
-    Contract.display_global_corgis()
-      .then((corgis) => {
-        setDisplay(corgis)
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.log(error)
-        setError(error)});
+    let corgis = Contract.display_global_corgis()
+    setDisplay(corgis)
+    setLoading(false)
   }, [Contract]);
 
   const value = {
@@ -130,7 +118,6 @@ export const ContractContextProvider = ({ Contract, children }) => {
     getCorgi,
     getCorgisList,
     getDisplayCorgis,
-    getCorgiOwner
   };
 
   return (

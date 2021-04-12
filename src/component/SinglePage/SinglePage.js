@@ -17,26 +17,12 @@ import iconShare from "../../assets/images/icon-share.svg";
 const SinglePage = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
-  const { corgi, loading, getCorgi, transfering, getCorgiOwner } = useContract;
-  const id = Number(window.location.pathname.slice(-2))
-  const [owner, setOwner] = useState(null)
-
+  const { corgi, loading, getCorgi, transfering } = useContract;
+  const id = Number(window.location.pathname.slice(7))
 
   useEffect(() => {
-    if (id) {
       getCorgi(id);
-    }
   }, [getCorgi, id]);
-
-  useEffect(() => {
-    async function getOwner() {
-      let owner = await getCorgiOwner(corgi.id)
-      setOwner(owner)
-    }
-    if(corgi){
-      getOwner()
-    }
-  })
 
   const [showSend, setSend] = useState(false);
   const [showShare, setShare] = useState(false);
@@ -57,11 +43,7 @@ const SinglePage = () => {
   if (!corgi || loading) {
     return <Spinner />;
   }
-  if (!id || ( owner && owner !==nearContext.user.accountId)) {
-    console.log(id)
-    console.log(owner)
-    console.log(nearContext.user.accountId)
-    console.log('come here')
+  if (!!id || ( corgi.owner && corgi.owner !== nearContext.user.accountId)) {
     return <Redirect to="/account" />;
   }
 

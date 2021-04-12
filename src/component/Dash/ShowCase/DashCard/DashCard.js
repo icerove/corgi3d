@@ -1,18 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import Corgi from "../../../CorgiCard/Corgi/Corgi";
 import { Dialogue } from "../../../CorgiCard/Card";
 
-const DashCard = ({ corgi, getCorgiOwner }) => {
-  const [owner, setOwner] = useState(null)
-
-  useEffect(() => {
-    async function getOwner() {
-      let owner = await getCorgiOwner(corgi.id)
-      setOwner(owner)
-    }
-    getOwner()
-  })
+const DashCard = ({ corgi }) => {
 
   return (
     <div className="creation">
@@ -31,7 +22,7 @@ const DashCard = ({ corgi, getCorgiOwner }) => {
       </div>
       <p className="dogname">{corgi.name}</p>
       <p className="address">
-        Created by <span className="orange">@{owner}</span>
+        Created by <span className="orange">@{corgi.owner}</span>
       </p>
       <style>{`
             .creation {

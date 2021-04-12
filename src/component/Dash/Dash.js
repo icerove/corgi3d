@@ -9,7 +9,7 @@ import ShowCase from "./ShowCase/ShowCase";
 const Dash = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
-  const { getDisplayCorgis, displayCorgis, getCorgiOwner } = useContract;
+  const { getDisplayCorgis, displayCorgis } = useContract;
 
   useEffect(() => getDisplayCorgis(), [getDisplayCorgis]);
   
@@ -26,7 +26,7 @@ const Dash = () => {
         isLoading={nearContext.isLoading}
         user={nearContext.user}
       />
-      <ShowCase displayCorgis={corgis} getCorgiOwner={getCorgiOwner} />
+      <ShowCase displayCorgis={corgis} />
       <style>{`
             .Dash {
                 width: 100%;

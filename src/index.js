@@ -39,9 +39,18 @@ async function InitContract() {
     nearConfig.contractName,
     {
       // View methods are read only. They don't modify the state, but usually return some value.
-      viewMethods: ["get_corgi", "get_corgis_by_owner", "display_global_corgis", "get_token_owner"],
+      viewMethods: ["get_corgi", 
+                    "get_corgis_by_owner", 
+                    "display_global_corgis", 
+                    "get_token_owner"],
       // Change methods can modify the state. But you don't receive the returned value when called.
-      changeMethods: ["transfer_with_message", "create_corgi", "transfer_from_with_message", "delete_corgi"],
+      changeMethods: ["transfer_with_message", 
+                      "create_corgi", 
+                      "transfer_from_with_message", 
+                      "delete_corgi",
+                      "sell_corgi",
+                      "buy_corgi"
+                    ],
       // Sender is the account ID to initialize transactions.
       sender: walletConnection.getAccountId(),
     }
