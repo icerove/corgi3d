@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Dash from "./component/Dash/Dash";
+import Market from "./component/Market/Market";
 
 import Account from "./component/Account/Account";
 import Profile from "./component/Profile/Profile";
@@ -12,7 +13,7 @@ import SinglePage from "./component/SinglePage/SinglePage";
 import SharePage from "./component/SharePage/SharePage";
 
 import Header from "./component/Header/Header";
-import Footer from "./component/Footer/Footer";
+// import Footer from "./component/Footer/Footer";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/corgi/:id" component={SinglePage} />
         <Route exact path="/share/:id" component={SharePage} />
+        <Route exact path="/market" component={Market} />
         <Route
           render={() => (
             <h1>
@@ -34,7 +36,7 @@ const App = () => {
           )}
         />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
       <style>{`
         body {
           text-align: center;

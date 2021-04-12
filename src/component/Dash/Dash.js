@@ -17,6 +17,8 @@ const Dash = () => {
     nearContext.signIn();
   };
 
+  const corgis = displayCorgis.slice(-9)
+
   return (
     <div className="Dash">
       <Poster
@@ -24,7 +26,7 @@ const Dash = () => {
         isLoading={nearContext.isLoading}
         user={nearContext.user}
       />
-      <ShowCase displayCorgis={displayCorgis} getCorgiOwner={getCorgiOwner} />
+      <ShowCase displayCorgis={corgis} getCorgiOwner={getCorgiOwner} />
       <style>{`
             .Dash {
                 width: 100%;

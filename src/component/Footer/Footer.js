@@ -32,14 +32,17 @@ const Footer = () => (
     </div>
     <style>{`
       .footer {
+        position: relative;
+        bottom:0;
+        left:0;
         font-family: 'Poppins', sans-serif;
         font-size: 0.7em;
         font-weight: 200;
         color: #4A4F54;
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         background-color: #f8f8f8;
-        max-width: 100%;
+        width: 100%;
         margin-top: 1%;
         padding: 3%;
         height: 80px;

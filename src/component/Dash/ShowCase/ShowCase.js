@@ -4,7 +4,7 @@ import React from "react";
 import DashCard from "./DashCard/DashCard";
 
 const ShowCase = ({ displayCorgis, getCorgiOwner }) => {
-  let Corgis = displayCorgis.slice(-9).map((corgi) => {
+  let Corgis = displayCorgis.map((corgi) => {
     return (
       <Link
         to={`/share/${corgi.id}`}
