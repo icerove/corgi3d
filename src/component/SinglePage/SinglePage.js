@@ -26,6 +26,18 @@ const SinglePage = () => {
     getCorgi(id);
   }, [getCorgi, id]);
 
+  useEffect(() => {
+    if (corgi) {
+      localStorage.setItem(
+        "corgi",
+        JSON.stringify({
+          length: parseFloat(corgi.sausage),
+          color: corgi.color,
+        })
+      );
+    }
+  }, [corgi]);
+
   const [showSend, setSend] = useState(false);
   const [showShare, setShare] = useState(false);
   const [showSell, setSell] = useState(false);
