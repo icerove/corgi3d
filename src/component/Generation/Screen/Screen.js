@@ -35,7 +35,7 @@ const Screen = ({ backgroundColor, color }) => {
           }}
         />
       </div>
-      <img src={raritySample} alt="" />
+      <img src={raritySample} alt="" style={{width: "100%"}}/>
       <style>{`
             .screen {
               background-color: ${backgroundColor};

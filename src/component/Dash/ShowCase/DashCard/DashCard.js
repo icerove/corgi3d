@@ -4,7 +4,6 @@ import Corgi from "../../../CorgiCard/Corgi/Corgi";
 import { Dialogue } from "../../../CorgiCard/Card";
 
 const DashCard = ({ corgi }) => {
-
   return (
     <div className="creation">
       <div className="corgiboard">
@@ -22,7 +21,7 @@ const DashCard = ({ corgi }) => {
       </div>
       <p className="dogname">{corgi.name}</p>
       <p className="address">
-        Created by <span className="orange">@{corgi.owner}</span>
+        Sell price <span className="orange">{corgi.selling_price} Ⓝ</span>
       </p>
       <style>{`
             .creation {
@@ -65,4 +64,4 @@ const DashCard = ({ corgi }) => {
   );
 };
 
-export default DashCard
+export default DashCard;

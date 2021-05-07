@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 import Button from "../../utils/Button";
 import Spinner from "../../utils/Spinner";
@@ -16,7 +17,15 @@ const Poster = ({ requestSignIn, isLoading, user }) => {
       <Button description="Login with NEAR" action={requestSignIn} />
     );
   } else {
-    showButton = <div className="show">Logged In {user.accountId}</div>;
+    showButton = (
+    <>
+    <div className="show">Logged In {user.accountId}</div>
+    <NavLink exact to="/market">
+    <div className="market" >Go to Corgi Market</div>
+    </NavLink>
+    </>
+    )
+    
   }
   return (
     <div className="wrapper">
@@ -34,7 +43,7 @@ const Poster = ({ requestSignIn, isLoading, user }) => {
       </div>
       <div className="pop">
         <h2 className="title">Corgis Display</h2>
-        <img src={sample} alt="" />
+        <img src={sample} alt="" style={{width: "75%"}}/>
       </div>
       <style>{`
     .wrapper{
@@ -93,6 +102,17 @@ const Poster = ({ requestSignIn, isLoading, user }) => {
         border-radius: 5px;
         border: 2px solid #fbb040;
         background-color: #fff;
+        padding: 5px 30px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+        text-align: center;
+      }
+
+      .market {
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 2px solid #fbb040;
+        background-color: #fbb040;
+        color: #ffe3c9;
         padding: 5px 30px;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
         text-align: center;

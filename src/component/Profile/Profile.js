@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Redirect } from "react-router-dom";
-
+import { utils } from "near-api-js";
 import { NearContext } from "../../context/NearContext";
 import { ContractContext } from "../../hooks/contract";
 
@@ -12,7 +12,15 @@ import { CorgiTwo } from "../utils/corgiAnimation";
 const Profile = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
-  const { corgis, loading, deleteCorgi, deleting, deleted, setDeleted, error } = useContract;
+  const {
+    corgis,
+    loading,
+    deleteCorgi,
+    deleting,
+    deleted,
+    setDeleted,
+    error,
+  } = useContract;
 
   if (!nearContext.user) {
     return <Redirect to="/" />;
@@ -27,12 +35,12 @@ const Profile = () => {
   if (corgis && corgis.length > 0) {
     Corgis = corgis.map((corgi) => {
       return (
-        <ProfileRow 
-          deleteCorgi={deleteCorgi} 
-          corgi={corgi} 
-          key={corgi.id} 
+        <ProfileRow
+          deleteCorgi={deleteCorgi}
+          corgi={corgi}
+          key={corgi.id}
           deleted={deleted}
-          setDeleted={setDeleted}  
+          setDeleted={setDeleted}
         />
       );
     });
@@ -63,10 +71,13 @@ const Profile = () => {
   return (
     <div>
       <h1>Your Corgis</h1>
-      <p>look and delete</p>
+      <p>
+        NEAR Balance:{" "}
+        {utils.format.formatNearAmount(nearContext.user.balance, 5)} Ⓝ
+      </p>
       {error && <p>{error}</p>}
       <div>{Corgis}</div>
     </div>
   );
 };
-export default Profile
+export default Profile;

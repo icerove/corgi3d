@@ -11,8 +11,7 @@ import Generation from "../Generation/Generation"
 const Account = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
-  const { loading, getCorgisList } = useContract;
-  let {corgis} = useContract;
+  const { loading, getCorgisList,corgis } = useContract;
   let Corgis;
 
   useEffect(() => {

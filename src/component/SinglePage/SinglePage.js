@@ -7,34 +7,41 @@ import { ContractContext } from "../../hooks/contract";
 import { BigCard } from "../CorgiCard/Card";
 import Send from "./Send/Send";
 import Share from "./Share/Share";
+import Sell from "./Sell/Sell";
 
 import Spinner from "../utils/Spinner";
 import Rate from "../utils/Rate";
 
 import iconSend from "../../assets/images/icon-send.svg";
 import iconShare from "../../assets/images/icon-share.svg";
+import iconSell from "../../assets/images/icon-sell.svg";
 
 const SinglePage = () => {
   const nearContext = useContext(NearContext);
   const useContract = useContext(ContractContext);
   const { corgi, loading, getCorgi, transfering } = useContract;
-  const id = Number(window.location.pathname.slice(7))
+  const id = Number(window.location.pathname.slice(7));
 
   useEffect(() => {
-      getCorgi(id);
+    getCorgi(id);
   }, [getCorgi, id]);
 
   const [showSend, setSend] = useState(false);
   const [showShare, setShare] = useState(false);
+  const [showSell, setSell] = useState(false);
   const openSendModal = () => {
     setSend(true);
   };
   const openShareModal = () => {
     setShare(true);
   };
+  const openSellModal = () => {
+    setSell(true);
+  };
   const closeModal = () => {
     setSend(false);
     setShare(false);
+    setSell(false);
   };
 
   if (!nearContext.user) {
@@ -43,7 +50,7 @@ const SinglePage = () => {
   if (!corgi || loading) {
     return <Spinner />;
   }
-  if (!!id || ( corgi.owner && corgi.owner !== nearContext.user.accountId)) {
+  if (corgi.owner && corgi.owner !== nearContext.user.accountId) {
     return <Redirect to="/account" />;
   }
 
@@ -56,6 +63,7 @@ const SinglePage = () => {
         closeModal={closeModal}
       />
       <Share corgi={corgi} closeModal={closeModal} show={showShare} />
+      <Sell corgi={corgi} closeModal={closeModal} show={showSell} />
       <div>
         <h1>Meet {corgi.name}!</h1>
         <div>
@@ -71,6 +79,7 @@ const SinglePage = () => {
           <SendAndShare
             openSendModal={openSendModal}
             openShareModal={openShareModal}
+            openSellModal={openSellModal}
           />
         </div>
       </div>
@@ -85,8 +94,8 @@ const SinglePage = () => {
       
       .card {
           background-color: azure;
-          margin: 3%;
-          padding: 2%;
+          margin-bottom: 10px;
+          padding-left: 10px;
           display: flex;
           border-radius: 5px;
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
@@ -100,13 +109,17 @@ const SinglePage = () => {
       .text {
           margin-left: 10px;
           display: inline-block;
-          width: 200px;
+          // width: 200px;
           text-align: left;
           padding: 0;
       }
       
       .small {
           display: none;
+      }
+
+      .button-part {
+        width: 80%;
       }
       
       @media all and (max-width: 416px) {
@@ -124,8 +137,8 @@ const SinglePage = () => {
             width: 100px;
           }
 
-          .icontext {
-            display: none;
+          .button-part {
+            width: 200px;
           }
       }
       `}</style>
@@ -133,16 +146,17 @@ const SinglePage = () => {
   );
 };
 
-export default SinglePage
+export default SinglePage;
 
-const SendAndShare = ({ openShareModal, openSendModal }) => {
-  let style = { display: "flex", flexDirection: "column", width: "300px" };
+const SendAndShare = ({ openShareModal, openSendModal, openSellModal }) => {
+  let style = { display: "flex", flexDirection: "column" };
   return (
-    <div>
-      <h5 className="icontext">What would you like to do with </h5>
+    <div className="button-part">
+      <h5 className="icontext">What would you like to do</h5>
       <span style={style}>
         <SendCard clicked={openSendModal} />
         <ShareCard clicked={openShareModal} />
+        <SellCard clicked={openSellModal} />
       </span>
     </div>
   );
@@ -177,6 +191,23 @@ const ShareCard = ({ clicked }) => {
       <div className="text">
         <h3 className="cardChar">Share on Social</h3>
         <p>Got something rare? It is time to brag a bit.</p>
+      </div>
+    </button>
+  );
+};
+
+const SellCard = ({ clicked }) => {
+  return (
+    <button className="card" onClick={clicked}>
+      <img
+        src={iconSell}
+        alt="Share"
+        style={{ height: "60%", paddingTop: "20px" }}
+      />
+      <div className="small">Sell</div>
+      <div className="text">
+        <h3 className="cardChar">Sell on Market</h3>
+        <p>Got something rare? Try for good luck.</p>
       </div>
     </button>
   );

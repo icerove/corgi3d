@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { ContractContext } from "../../hooks/contract";
-import { NearContext } from "../../context/NearContext";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { GiBowTieRibbon, GiImperialCrown } from "react-icons/gi";
@@ -9,13 +8,14 @@ import { GiBowTieRibbon, GiImperialCrown } from "react-icons/gi";
 import { BigCard } from "../CorgiCard/Card";
 import Spinner from "../utils/Spinner";
 import { Common, Uncommon, Rare, VeryRare } from "../utils/Photo";
+import Button from "../utils/Button";
 
 const SharePage = () => {
-  const nearContext = useContext(NearContext);
   const [copied, setCopied] = useState(false);
   const useContract = useContext(ContractContext);
-  const { corgi, getCorgi, loading } = useContract;
-  const id = Number(window.location.pathname.slice(7))
+  const { corgi, getCorgi, loading, buyCorgi } = useContract;
+  const id = Number(window.location.pathname.slice(7));
+
   useEffect(() => {
     if (id) {
       getCorgi(id);
@@ -26,20 +26,27 @@ const SharePage = () => {
     return <Spinner />;
   }
 
-  const rate = corgi.rate;
-  let show;
-  if (rate === "COMMON") {
-    show = <Common color={corgi.color} />;
-  } else if (rate === "UNCOMMON") {
-    show = <Uncommon color={corgi.color} />;
-  } else if (rate === "RARE") {
-    show = <Rare color={corgi.color} />;
-  } else if (rate === "VERY RARE") {
-    show = <VeryRare color={corgi.color} />;
-  } else if (rate === "ULTRA RARE") {
-    show = "ULTRA RARE";
-  }
+  const getRate = (corgi) => {
+    let show;
+    if (corgi.rate === "COMMON") {
+      show = <Common color={corgi.color} />;
+    } else if (corgi.rate === "UNCOMMON") {
+      show = <Uncommon color={corgi.color} />;
+    } else if (corgi.rate === "RARE") {
+      show = <Rare color={corgi.color} />;
+    } else if (corgi.rate === "VERY RARE") {
+      show = <VeryRare color={corgi.color} />;
+    } else if (corgi.rate === "ULTRA RARE") {
+      show = "ULTRA RARE";
+    }
+    return show;
+  };
 
+  const buy = () => {
+    buyCorgi(id, corgi.selling_price);
+  };
+
+  const show = getRate(corgi);
   const address = window.location.origin + "/share/" + corgi.id;
   const sausage = Number(corgi.sausage).toFixed(4);
 
@@ -70,26 +77,26 @@ const SharePage = () => {
           </p>
         </div>
       </div>
-      <div style={{ marginBottom: "10px" }}>
-        {nearContext.user ? (
-          <p>Create your own and share</p>
-        ) : (
-          <p>
-            Do you want to have corgi yourself? click Get started and enjoy the
-            advanture!
-          </p>
-        )}
-        <p>Do you also want to share {corgi.name}?</p>
-        <CopyToClipboard text={address} onCopy={() => setCopied(true)}>
-          <button className="button">Copy Link</button>
-        </CopyToClipboard>
-        {copied && (
-          <span style={{ color: "#961be0", marginLeft: "5px" }}>Copied.</span>
+      <div className="text">
+        <div style={{ marginBottom: "10px" }}>
+          <p>Do you also want to share {corgi.name}?</p>
+          <CopyToClipboard text={address} onCopy={() => setCopied(true)}>
+            <button className="button">Copy Link</button>
+          </CopyToClipboard>
+          {copied && (
+            <span style={{ color: "#961be0", marginLeft: "5px" }}>Copied.</span>
+          )}
+        </div>
+        {corgi.selling && (
+          <div>
+            <p>Do you want to buy {corgi.name}?</p>
+            <Button description="Buy corgi" action={buy} />
+          </div>
         )}
       </div>
       <style>{`
           .text {
-              width: 70%;
+              width: 90%;
               max-width: 800px;
               margin: 2% auto;
               display: flex;
@@ -108,4 +115,4 @@ const SharePage = () => {
   );
 };
 
-export default SharePage
+export default SharePage;

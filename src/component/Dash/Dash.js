@@ -12,13 +12,14 @@ const Dash = () => {
   const { getDisplayCorgis, displayCorgis } = useContract;
 
   useEffect(() => getDisplayCorgis(), [getDisplayCorgis]);
-  
+
   const signIn = () => {
     nearContext.signIn();
   };
-
-  const corgis = displayCorgis.slice(-9)
-
+  let corgis = displayCorgis
+    ? displayCorgis.filter((corgi) => corgi.selling === true)
+    : [];
+  corgis = corgis.length > 6 ? corgis.slice(-6) : corgis;
   return (
     <div className="Dash">
       <Poster
@@ -26,7 +27,7 @@ const Dash = () => {
         isLoading={nearContext.isLoading}
         user={nearContext.user}
       />
-      <ShowCase displayCorgis={corgis} />
+      {corgis.length > 0 && <ShowCase displayCorgis={corgis} />}
       <style>{`
             .Dash {
                 width: 100%;
@@ -39,4 +40,4 @@ const Dash = () => {
   );
 };
 
-export default Dash
+export default Dash;

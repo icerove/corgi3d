@@ -30,6 +30,7 @@ const Generation = () => {
 
   if (created) {
     setCreated(false)
+    console.log('come here')
     return <Redirect to="/account" />;
   }
 

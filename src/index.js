@@ -11,7 +11,7 @@ import ContractContextProvider from "./hooks/contract";
 
 // Initializing contract
 async function InitContract() {
-  const nearConfig = getConfig(process.env.NODE_ENV || 'testnet');
+  const nearConfig = getConfig(process.env.NODE_ENV || "testnet");
 
   // Initializing connection to the NEAR
   const near = await nearlib.connect({
@@ -39,18 +39,21 @@ async function InitContract() {
     nearConfig.contractName,
     {
       // View methods are read only. They don't modify the state, but usually return some value.
-      viewMethods: ["get_corgi", 
-                    "get_corgis_by_owner", 
-                    "display_global_corgis", 
-                    "get_token_owner"],
+      viewMethods: [
+        "get_corgi",
+        "get_corgis_by_owner",
+        "display_global_corgis",
+        "get_token_owner",
+      ],
       // Change methods can modify the state. But you don't receive the returned value when called.
-      changeMethods: ["transfer_with_message", 
-                      "create_corgi", 
-                      "transfer_from_with_message", 
-                      "delete_corgi",
-                      "sell_corgi",
-                      "buy_corgi"
-                    ],
+      changeMethods: [
+        "transfer_with_message",
+        "create_corgi",
+        "transfer_from_with_message",
+        "delete_corgi",
+        "sell_corgi",
+        "buy_corgi",
+      ],
       // Sender is the account ID to initialize transactions.
       sender: walletConnection.getAccountId(),
     }
@@ -77,4 +80,4 @@ window.nearInitPromise = InitContract()
 
     ReactDOM.render(app, document.getElementById("root"));
   })
-  .catch(console.error);
+  .catch((e) => console.error(e));
